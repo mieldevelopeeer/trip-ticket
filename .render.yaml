@@ -1,1 +1,12 @@
-ECHO is on.
+services:
+  - type: web
+    name: trip-ticket
+    env: php
+    plan: free
+    phpVersion: "8.1"
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      npm install
+      npm run build
+      php artisan key:generate
+    startCommand: ""

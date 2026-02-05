@@ -1,12 +1,13 @@
 services:
   - type: web
     name: trip-ticket
-    env: php
+    runtime: php  # Changed from 'env' to 'runtime'
     plan: free
-    phpVersion: "8.1"
+    envVars:
+      - key: PHP_VERSION
+        value: "8.1"
     buildCommand: |
       composer install --no-dev --optimize-autoloader
       npm install
       npm run build
-      php artisan key:generate
-    startCommand: ""
+    startCommand: heroku-php-apache2 public/
